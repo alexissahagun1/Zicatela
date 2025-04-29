@@ -28,11 +28,28 @@ const BookingForm = ({ property }: BookingFormProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Construct Cal.com booking link with pre-filled data
-    const calLink = `https://cal.com/${property.calendarId}?name=${encodeURIComponent(formData.fullName)}&email=${encodeURIComponent(formData.email)}&notes=${encodeURIComponent(`Phone: ${formData.phone}\nGuests: ${formData.guests}\nProperty: ${property.name}`)}&date=${startDate?.toISOString()}`;
-    
-    // Open Cal.com booking page in a new tab
-    window.open(calLink, '_blank');
+    // En modo desarrollo, solo mostrar los datos en consola
+    console.log('Reservación solicitada:', {
+      property: property.name,
+      dates: {
+        checkIn: startDate,
+        checkOut: endDate,
+      },
+      guest: formData,
+    });
+
+    // Mostrar mensaje de confirmación
+    alert('Gracias por tu solicitud. En breve nos pondremos en contacto contigo para confirmar tu reserva.');
+
+    // Resetear el formulario
+    setStartDate(null);
+    setEndDate(null);
+    setFormData({
+      fullName: '',
+      email: '',
+      phone: '',
+      guests: '1',
+    });
   };
 
   return (
@@ -46,7 +63,7 @@ const BookingForm = ({ property }: BookingFormProps) => {
             <label className="block text-gray-700 mb-2">Fecha de llegada</label>
             <DatePicker
               selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              onChange={(date: Date | null) => setStartDate(date)}
               selectsStart
               startDate={startDate}
               endDate={endDate}
@@ -60,11 +77,11 @@ const BookingForm = ({ property }: BookingFormProps) => {
             <label className="block text-gray-700 mb-2">Fecha de salida</label>
             <DatePicker
               selected={endDate}
-              onChange={(date) => setEndDate(date)}
+              onChange={(date: Date | null) => setEndDate(date)}
               selectsEnd
               startDate={startDate}
               endDate={endDate}
-              minDate={startDate}
+              minDate={startDate || new Date()}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald"
               placeholderText="Selecciona fecha"
               required
@@ -128,11 +145,11 @@ const BookingForm = ({ property }: BookingFormProps) => {
           type="submit"
           className="w-full btn-primary"
         >
-          Reservar ahora
+          Solicitar reserva
         </button>
 
         <p className="text-sm text-gray-600 text-center mt-4">
-          Al hacer clic en "Reservar ahora", serás redirigido a nuestro sistema de reservas seguro.
+          Al enviar tu solicitud, revisaremos la disponibilidad y te contactaremos para confirmar tu reserva.
         </p>
       </div>
     </form>
