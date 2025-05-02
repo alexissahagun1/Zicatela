@@ -147,12 +147,17 @@ export default function Contact() {
 
                 {/* Map */}
                 <div className="mt-8 h-64 relative rounded-lg overflow-hidden">
-                  <Image
-                    src="https://source.unsplash.com/1600x900/?map,beach"
-                    alt="Mapa de ubicación"
-                    fill
-                    className="object-cover"
-                  />
+                  <iframe
+                    title="Mapa de Zicatela, Puerto Escondido, Oaxaca"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.964964357425!2d-97.0738399240846!3d15.84989908481359!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85c549e2e2e2e2e3%3A0x7e7e7e7e7e7e7e7e!2sZicatela%2C%20Puerto%20Escondido%2C%20Oax.!5e0!3m2!1ses-419!2smx!4v1710000000000!5m2!1ses-419!2smx"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="absolute inset-0 w-full h-full"
+                  ></iframe>
                 </div>
               </div>
             </div>
